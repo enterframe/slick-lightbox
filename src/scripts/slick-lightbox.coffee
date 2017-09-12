@@ -47,10 +47,16 @@ class SlickLightbox
         imgSourceParams = """ data-lazy="#{ source }" src="#{ lazyPlaceholder }" """
       else
         imgSourceParams = """ src="#{ source }" """
+
+      if /.(jpg|jpeg|png|gif)$/.test(source)
+        tag = """<img class="slick-lightbox-slick-img" #{ imgSourceParams } />"""
+      else
+        tag = """<iframe class="slick-lightbox-slick-iframe" data-src="#{ source }"></iframe>"""
+
       """
         <div class="slick-lightbox-slick-item">
           <div class="slick-lightbox-slick-item-inner">
-            <img class="slick-lightbox-slick-img" #{ imgSourceParams } />
+            #{ tag }
             #{ caption }
           </div>
         </div>"""

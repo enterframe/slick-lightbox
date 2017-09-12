@@ -40,13 +40,18 @@
             var $items, createItem, itemTemplate, lazyPlaceholder, length, links;
             lazyPlaceholder = this.options.lazyPlaceholder || 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
             itemTemplate = function (source, caption, lazy) {
-                var imgSourceParams;
+                var imgSourceParams, tag;
                 if (lazy === true) {
                     imgSourceParams = ' data-lazy="' + source + '" src="' + lazyPlaceholder + '" ';
                 } else {
                     imgSourceParams = ' src="' + source + '" ';
                 }
-                return '<div class="slick-lightbox-slick-item">\n  <div class="slick-lightbox-slick-item-inner">\n    <img class="slick-lightbox-slick-img" ' + imgSourceParams + ' />\n    ' + caption + '\n  </div>\n</div>';
+                if (/.(jpg|jpeg|png|gif)$/.test(source)) {
+                    tag = '<img class="slick-lightbox-slick-img" ' + imgSourceParams + ' />';
+                } else {
+                    tag = '<iframe class="slick-lightbox-slick-iframe" data-src="' + source + '"></iframe>';
+                }
+                return '<div class="slick-lightbox-slick-item">\n  <div class="slick-lightbox-slick-item-inner">\n    ' + tag + '\n    ' + caption + '\n  </div>\n</div>';
             };
             if (this.options.images) {
                 links = $.map(this.options.images, function (img) {

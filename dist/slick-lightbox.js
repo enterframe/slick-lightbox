@@ -46,7 +46,7 @@
                 } else {
                     imgSourceParams = ' src="' + source + '" ';
                 }
-                if (/.(jpg|jpeg|png|gif)$/.test(source)) {
+                if (/.(jpg|jpeg|png|gif)$/i.test(source)) {
                     tag = '<img class="slick-lightbox-slick-img" ' + imgSourceParams + ' />';
                 } else {
                     tag = '<iframe class="slick-lightbox-slick-iframe" data-src="' + source + '"></iframe>';
